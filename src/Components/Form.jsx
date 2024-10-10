@@ -199,7 +199,8 @@ const Form = () => {
       setReq2(true);
     }
 
-    if (mno.length > 0) {
+    const mobileNumberPattern = /^[0-9]{10}$/;
+    if (mno.length > 0 && mobileNumberPattern.test(mno)) {
       setReq3(false);
     } else {
       setReq3(true);
@@ -281,6 +282,7 @@ const Form = () => {
       empcode.length > 0 &&
       fname.length > 0 &&
       mno.length > 0 &&
+      mobileNumberPattern.test(mno) &&
       djoin.length > 0 &&
       sal.length > 0 &&
       email.length > 0 &&
@@ -406,7 +408,7 @@ const Form = () => {
             onChange={handlemno}
           />
           <p className={req3 ? style.block : style.none}>
-            Required field can not empty
+            enter valid mobile no
           </p>
         </div>
         <div className={style.inndiv}>
