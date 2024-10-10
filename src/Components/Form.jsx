@@ -43,6 +43,7 @@ const Form = () => {
   const [req12, setReq12] = useState(false);
   const [req13, setReq13] = useState(false);
   const [req14, setReq14] = useState(false);
+  const [req15, setReq15] = useState(false);
 
   function handleempcode(event) {
     setReq1(false);
@@ -63,6 +64,7 @@ const Form = () => {
   }
 
   function handleemail(event) {
+    setReq15(false);
     setEmail(event.target.value);
   }
 
@@ -163,6 +165,7 @@ const Form = () => {
           empcode: empcode,
           firstname: fname,
           mobileno: mno,
+          email: email,
           DOJ: djoin,
           salary: sal,
           gender: gen,
@@ -217,6 +220,13 @@ const Form = () => {
       setReq6(false);
     } else {
       setReq6(true);
+    }
+    const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (email.length > 0 && emailRegex.test(email)) {
+      setReq15(false);
+    } else {
+      setReq15(true);
     }
 
     if (accno.length > 0) {
@@ -273,6 +283,8 @@ const Form = () => {
       mno.length > 0 &&
       djoin.length > 0 &&
       sal.length > 0 &&
+      email.length > 0 &&
+      emailRegex.test(email) &&
       gen != "Select Gender" &&
       accno.length > 0 &&
       ifsccode.length > 0 &&
@@ -286,6 +298,7 @@ const Form = () => {
       adddata();
       console.log("Emp code is :", empcode);
       console.log("First name is :", fname);
+      console.log("Email is :", email);
       console.log("Mobile number is :", mno);
       console.log("Date of joining is :", djoin);
       console.log("Monthly salary is :", sal);
@@ -367,6 +380,9 @@ const Form = () => {
             value={email}
             onChange={handleemail}
           />
+          <p className={req15 ? style.block : style.none}>
+            Required a valid email
+          </p>
         </div>
         <div className={style.inndiv}>
           <label className={style.lebell1}>Father's Name</label>
